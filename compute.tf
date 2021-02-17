@@ -2,10 +2,6 @@ data "google_compute_zones" "available" {
   project = google_project.project.project_id
 }
 
-resource "google_compute_address" "static" {
-  name = "ipv4-address"
-}
-
 resource "google_compute_instance" "default" {
   project      = google_project.project.project_id
   zone         = data.google_compute_zones.available.names[0]
@@ -21,7 +17,6 @@ resource "google_compute_instance" "default" {
   network_interface {
     network = "default"
     access_config {
-      nat_ip = google_compute_address.static.address
     }
   }
 
