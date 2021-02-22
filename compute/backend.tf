@@ -1,6 +1,6 @@
 terraform {
  backend "gcs" {
    bucket  = "justizin-terraform-admin"
-   prefix  = "terraform/state"
+   prefix  = "terraform_compute/state"
  }
 }
