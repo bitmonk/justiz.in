@@ -1,7 +1,11 @@
 variable "google_project_id" {}
+variable "region" {}
+
+provider "google" {
+  region = var.region
+}
 
 data "google_compute_zones" "available" {
-  project = var.google_project_id
 }
 
 resource "google_compute_instance" "default" {
