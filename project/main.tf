@@ -2,6 +2,7 @@ variable "project_name" {}
 variable "billing_account" {}
 variable "org_id" {}
 variable "region" {}
+variable "iam_admin" {}
 
 provider "google" {
   region = var.region
@@ -28,6 +29,15 @@ resource "google_project_service" "service" {
 
   project            = google_project.project.project_id
   disable_on_destroy = false
+}
+
+resource "google_project_iam_binding" "admin" {
+  project            = google_project.project.project_id
+  role               = "roles/compute.admin"
+
+  members = [
+    var.iam_admin
+  ]
 }
 
 output "project_id" {
